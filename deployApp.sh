@@ -1,12 +1,14 @@
 #!/bin/bash
 
 DIR=$1
-JAR_APP_NAME='cerebro'
 JAVA_HOME='/usr/lib/jvm/java-8-oracle'
-HOME_PATH='/home/ubuntu/'
-BASE_PATH=$HOME_PATH$DIR
-DEPLOY_DIR_NAME='deployment/'
-DEPLOY_PATH=$HOME_PATH$DEPLOY_DIR_NAME
+HOME_PATH='/home/ubuntu'
+BASE_PATH=$HOME_PATH/$DIR
+DEPLOY_PATH=$HOME_PATH/deployment
+
+source $DEPLOY_PATH/deployment.config
+
+JAR_APP_NAME=$REPOSITORY
 
 set -e
 
@@ -17,9 +19,9 @@ git checkout $1
 
 git pull
 
-new_properties=$DEPLOY_PATH$2'.properties'
+new_properties=$DEPLOY_PATH/$2'.properties'
 app_properties=$BASE_PATH'/src/main/resources/application.properties'
-sh $DEPLOY_PATH'updateProperties.sh' $new_properties $app_properties
+sh $DEPLOY_PATH'/updateProperties.sh' $new_properties $app_properties
 
 #build with min coverage as 0
 mvn install -DskipTests -DminCoverage=0.0

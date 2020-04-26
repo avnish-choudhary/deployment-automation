@@ -3,10 +3,13 @@
 branch=$1
 port=$2
 dir=$branch
+REPOSITORY='cerebro'
 HOME_DIR='/home/ubuntu'
 DEPLOY_PATH=$HOME_DIR'/deployment'
 PROPERTY_FILE=deployedApps.properties
 MSG='Deploying'
+
+source $DEPLOY_PATH/deployment.config
 
 if [ -z "$branch" ]; then
 	echo "Please provide your branch name"
@@ -40,7 +43,7 @@ trap cleanup EXIT
 validateBranchName() {
 	if [ "`git branch --list $branch`" ]
 	then
-   		echo "Branch name $branch already exists."
+   		echo "$branch branch is valid."
 	else 
 		echo "$branch branch doesn't exist" 
 		exit
@@ -78,7 +81,7 @@ findAvailablePort() {
         fi
 }
 
-cd $HOME_DIR/cerebro
+cd $HOME_DIR/$REPOSITORY
 validateBranchName
 
 cd $HOME_DIR
@@ -100,8 +103,8 @@ if [ -d "$dir" ]; then
 	delete=false
 else 
 	checkPortAvailability
-	cp -r cerebro/ $dir 2>/dev/null || :
-	#rsync -rv --exclude=nohup.out --stats cerebro/ $dir
+	cp -r $REPOSITORY/ $dir 2>/dev/null || :
+	#rsync -rv --exclude=nohup.out --stats $REPOSITORY/ $dir
 	cd $HOME_DIR/deployment
 	if [ -z "$port" ]; then
 		findAvailablePort

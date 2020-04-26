@@ -5,12 +5,18 @@ DIR='cerebro'
 PROPERTY_FILE=deployedApps.properties
 JAVA_HOME='/usr/lib/jvm/java-8-oracle'
 HOME_PATH='/home/ubuntu/'
-BASE_PATH=$HOME_PATH$DIR
 DEPLOY_PATH=$HOME_PATH'deployment'
+source $DEPLOY_PATH/deployment.config
+
+DIR=$REPOSITORY
+BASE_PATH=$HOME_PATH$DIR
 DEPLOYED_PROPERTIES=$DEPLOY_PATH/$PROPERTY_FILE
 APP_NAME='app8080'
 REPLACE_BRANCH=false
 DEPLOYED_BRANCH="`cat $DEPLOYED_PROPERTIES | grep "$APP_NAME" | cut -d'=' -f2`"
+
+source $DEPLOY_PATH/deployment.config
+
 
 set -e
 
@@ -60,6 +66,6 @@ echo $! >| app.pid
 
 sed -ir "s/^[#]*\s*app8080=.*/app8080=$BRANCH/" $DEPLOYED_PROPERTIES
 
-timeout 300 sh healthCheck.sh
+timeout 300 sh $DEPLOY_PATH/healthCheck.sh
 
 sh $DEPLOY_PATH/sendNotification.sh "Deployed successfully."
