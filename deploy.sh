@@ -3,7 +3,6 @@
 branch=$1
 port=$2
 dir=$branch
-REPOSITORY='cerebro'
 HOME_DIR='/home/ubuntu'
 DEPLOY_PATH=$HOME_DIR'/deployment'
 PROPERTY_FILE=deployedApps.properties
@@ -124,7 +123,7 @@ fi
 sh sendNotification.sh "<!here> $MSG $branch branch on $port"
 notify=true
 
-sh deployApp.sh $branch $APP
+bash deployApp.sh $branch $APP
 
 timeout 300 sh healthCheck.sh $port
 
