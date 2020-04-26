@@ -125,7 +125,7 @@ notify=true
 
 bash deployApp.sh $branch $APP
 
-timeout 300 sh healthCheck.sh $port
+timeout 180 sh healthCheck.sh $port
 
 sh sendNotification.sh "Deployed successfully"
 notify=false
