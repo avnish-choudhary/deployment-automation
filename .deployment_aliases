@@ -1,0 +1,5 @@
+alias deploy='bash /home/ubuntu/deployment/deploy.sh'
+alias undeploy='bash /home/ubuntu/deployment/undeploy.sh'
+alias deploymain='bash /home/ubuntu/deployment/deployMain.sh'
+alias portcheck='bash /home/ubuntu/deployment/checkAvailablePorts.sh'
+alias deploystatus='bash /home/ubuntu/deployment/sendDailyUpdates.sh'
