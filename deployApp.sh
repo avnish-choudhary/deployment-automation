@@ -27,12 +27,9 @@ sh $DEPLOY_PATH'/updateProperties.sh' $new_properties $app_properties
 mvn install -DskipTests -DminCoverage=0.0
 
 #stopping application
-if [ -f $1.pid ]; then
-	echo "Stopping Application"
-	sudo kill -9 $(cat $1.pid)
-	rm $1.pid
-	echo "Application Killed Successfully"
-fi
+echo "Stopping Application"
+sudo pkill -9 -f java 2> /dev/null
+echo "Application Killed Successfully"
 
 # Start application
 echo "Starting Application"
