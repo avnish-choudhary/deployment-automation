@@ -56,7 +56,7 @@ mvn install -DskipTests -DminCoverage=0.0
 
 #stopping application
 echo "Stopping Application"
-sudo kill $(cat app.pid)
+sudo pkill -9 -f java 2> /dev/null
 echo "Application Killed Successfully"
 # Restart application
 echo "Starting Application"
