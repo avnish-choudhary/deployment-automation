@@ -10,7 +10,7 @@ source $DEPLOY_PATH/deployment.config
 
 JAR_APP_NAME=$REPOSITORY
 
-set -e
+# set -e
 
 cd $BASE_PATH
 
