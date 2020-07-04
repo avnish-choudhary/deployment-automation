@@ -18,7 +18,7 @@ DEPLOYED_BRANCH="`cat $DEPLOYED_PROPERTIES | grep "$APP_NAME" | cut -d'=' -f2`"
 source $DEPLOY_PATH/deployment.config
 
 
-set -e
+#set -e
 
 if [ -n "$DEPLOYED_BRANCH" ]; then
 	if [ "$DEPLOYED_BRANCH" != "$BRANCH" ]; then
